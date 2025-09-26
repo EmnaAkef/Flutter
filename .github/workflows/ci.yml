@@ -1,0 +1,28 @@
+name: Flutter CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0' # Utilisez la version demandée par le formateur ou celle de l'exemple
+    
+    # Étape 1: Installer les dépendances
+    - name: Install dependencies
+      run: flutter pub get
+      
+    # Étape 2: Exécuter les tests
+    - name: Run tests
+      run: flutter test
+      
+    # Étape 3: Analyser le code
+    - name: Analyze code
+      run: flutter analyze
